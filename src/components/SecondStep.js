@@ -19,11 +19,8 @@ const SecondStep = (props) => {
   });
 
   const [showBtn, setShowBtn] = useState(false);
-  const [counter, setCounter] = React.useState(60);
+  const [counter, setCounter] = React.useState(6);
   React.useEffect(() => {
-    // setTimeout(() => {
-    //   setShowBtn(!showBtn);
-    // }, 12000)
     const timer =
       counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
       if ( counter === 0) setShowBtn(!showBtn);
@@ -36,7 +33,6 @@ const SecondStep = (props) => {
       .post("https://shift-backend.onrender.com/users/signin", data)
       .then((response) => {
         console.log(response.data.phone, response.data.code);
-        //setShowOTP(true)
         alert('Autorization!')
       })
       .catch((error) => {
@@ -60,26 +56,6 @@ const SecondStep = (props) => {
         animate={{ x: 0 }}
         transition={{ stiffness: 150 }}
       >
-        {/* <Form.Group controlId="first_name">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            type="email"
-            name="user_email"
-            placeholder="Enter your email address"
-            autoComplete="off"
-            {...register("user_email", {
-              required: "Email is required.",
-              pattern: {
-                value: /^[0-9]+$/,
-                message: "Email is not valid."
-              }
-            })}
-            className={`${errors.user_email ? "input-error" : ""}`}
-          />
-          {errors.user_email && (
-            <p className="errorMsg">{errors.user_email.message}</p>
-          )}
-        </Form.Group> */}
         <Form.Group controlId="phone">
           <Form.Label>Phone number</Form.Label>
           <Form.Control
@@ -100,12 +76,12 @@ const SecondStep = (props) => {
         <Form.Group controlId="code">
           <Form.Label>OTP code</Form.Label>
           <Form.Control
-            type="otp"
+            type="number"
             name="code"
-            placeholder="Choose a code"
+            placeholder="Enter a code OTP"
             autoComplete="off"
             {...register("code", {
-              required: "code is required.",
+              required: "OTP code is required.",
               minLength: {
                 value: 6,
                 message: "The short otp. Needs 6 digits"
@@ -122,16 +98,9 @@ const SecondStep = (props) => {
           )}
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" className="btn">
           Autorizations
         </Button>
-        <div>
-          New OTP code: 
-          {counter ? counter : (showBtn && 
-              <Button variant="primary" type="submit" name="btn-otp">
-                Click here
-              </Button>)}
-        </div>
       </motion.div>
     </Form>
   );
