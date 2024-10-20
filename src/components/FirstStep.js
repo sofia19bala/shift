@@ -77,7 +77,7 @@ const FirstStep = (props) => {
         transition={{ stiffness: 150 }}
       >
         <Form.Group controlId="phone">
-          <Form.Label>First Name</Form.Label>
+          <Form.Label>Phone number</Form.Label>
           <Form.Control
             type="number"
             name="phone"

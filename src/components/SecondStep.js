@@ -19,7 +19,7 @@ const SecondStep = (props) => {
   });
 
   const [showBtn, setShowBtn] = useState(false);
-  const [counter, setCounter] = React.useState(6);
+  const [counter, setCounter] = React.useState(60);
   React.useEffect(() => {
     // setTimeout(() => {
     //   setShowBtn(!showBtn);
@@ -37,15 +37,17 @@ const SecondStep = (props) => {
       .then((response) => {
         console.log(response.data.phone, response.data.code);
         //setShowOTP(true)
+        alert('Autorization!')
       })
       .catch((error) => {
         if (error.response) {
-          console.log(error.response);
-          console.log("server responded");
+          console.error(error.response);
+          console.error("server responded");
+          alert('Uncorrect phone number or OTP code')
         } else if (error.request) {
-          console.log("network error");
+          console.error("network error");
         } else {
-          console.log(error);
+          console.error(error);
         }
       });
   };
@@ -121,7 +123,7 @@ const SecondStep = (props) => {
         </Form.Group>
 
         <Button variant="primary" type="submit">
-          Autoriza
+          Autorizations
         </Button>
         <div>
           New OTP code: 

@@ -1,4 +1,4 @@
-$base-color: #e67e22;
+$base-color: #9a9a9a;
 $blue-color: #22ac11;
 
 * {
@@ -28,6 +28,10 @@ h1 {
 
 .btn {
   letter-spacing: 1px;
+  color: #000000;
+  background-color: #aaaaaa;
+  border-radius: 5%;
+  border-color: #ccc;
 }
 
 .steps {
@@ -45,17 +49,17 @@ h1 {
       color: $base-color;
     }
 
-    div:first-of-type {
-      border: 1px solid #ccc;
-      padding: 5px;
-      border-radius: 50%;
-      margin-right: 0.5rem;
-      width: 2rem;
-      height: 2rem;
-      text-align: center;
-      line-height: 100%;
-      padding-top: 7%;
-    }
+    // div:first-of-type {
+    //   //border: 1px solid #ccc;
+    //   padding: 5px;
+    //   //border-radius: 50%;
+    //   margin-right: 0.5rem;
+    //   width: 2rem;
+    //   height: 2rem;
+    //   text-align: center;
+    //   line-height: 100%;
+    //   padding-top: 7%;
+    // }
 
     :last-child {
       margin-top: 3%;
