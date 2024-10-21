@@ -47,19 +47,16 @@ const FirstStep = (props) => {
         animate={{ x: 0 }}
         transition={{ stiffness: 150 }}
       >
+        <h1>Вход</h1>
+        <p class='text-intro'>Введите номер телефона для входа в личный кабинет</p>
         <Form.Group controlId="phone">
-          <Form.Label>Phone number</Form.Label>
           <Form.Control
             type="number"
             name="phone"
-            placeholder="Enter your phone number"
+            placeholder="Телефон"
             autoComplete="off"
             {...register("phone", {
               required: "The phone number is required.",
-              // pattern: {
-              //   value: /^[0-9]+$/,
-              //   message: "The phone number is digit."
-              // },
             })}
             className={`${errors.phone ? "input-error" : ""}`}
           />
@@ -69,7 +66,7 @@ const FirstStep = (props) => {
         </Form.Group>
           
         <Button variant="primary" type="submit" className="btn">
-          Verification Code
+          Продолжить
         </Button>
       </motion.div>
     </Form>

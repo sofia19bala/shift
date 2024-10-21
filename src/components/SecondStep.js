@@ -19,7 +19,7 @@ const SecondStep = (props) => {
   });
 
   const [showBtn, setShowBtn] = useState(false);
-  const [counter, setCounter] = React.useState(6);
+  const [counter, setCounter] = React.useState(60);
   React.useEffect(() => {
     const timer =
       counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
@@ -39,7 +39,7 @@ const SecondStep = (props) => {
         if (error.response) {
           console.error(error.response);
           console.error("server responded");
-          alert('Uncorrect phone number or OTP code')
+          alert('Некорректный номер OTP кода')
         } else if (error.request) {
           console.error("network error");
         } else {
@@ -48,6 +48,27 @@ const SecondStep = (props) => {
       });
   };
 
+  const handlePhoneSubmit = () => {
+    const phoneNumber = document.getElementsByName('phone')[0].value;
+    console.log("Phone number submitted:", phoneNumber);
+    const data = {'phone': phoneNumber}
+    axios
+      .post("https://shift-backend.onrender.com/auth/otp", data)
+      .then((response) => {
+        console.log(response.data.phone);
+        alert('Новый OTP код отправлен')
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          console.log("server responded");
+        } else if (error.request) {
+          console.log("network error");
+        } else {
+          console.log(error);
+        }
+      });
+  }
   return (
     <Form className="input-form" onSubmit={handleSubmit(onSubmit)}>
       <motion.div
@@ -56,12 +77,13 @@ const SecondStep = (props) => {
         animate={{ x: 0 }}
         transition={{ stiffness: 150 }}
       >
+        <h1>Вход</h1>
+        <p class='text-intro'>Введите проверочный код для входа в личный кабинет</p>
         <Form.Group controlId="phone">
-          <Form.Label>Phone number</Form.Label>
           <Form.Control
             type="number"
             name="phone"
-            placeholder="Enter your phone number"
+            placeholder="Телефон"
             autoComplete="off"
             {...register("phone", {
               required: "The phone number is required.",             
@@ -74,11 +96,10 @@ const SecondStep = (props) => {
         </Form.Group>
 
         <Form.Group controlId="code">
-          <Form.Label>OTP code</Form.Label>
           <Form.Control
             type="number"
             name="code"
-            placeholder="Enter a code OTP"
+            placeholder="Проверочный код"
             autoComplete="off"
             {...register("code", {
               required: "OTP code is required.",
@@ -99,8 +120,15 @@ const SecondStep = (props) => {
         </Form.Group>
 
         <Button variant="primary" type="submit" className="btn">
-          Autorizations
+          Войти
         </Button>
+        <div>
+          {counter ? <p class='text-new-otp'>Запросить код повторно можно через {counter} секунд </p>: (showBtn && 
+              <Button  variant="btn-link" type="button" className="btn" onClick={handlePhoneSubmit}>
+                Запросить код еще раз
+              </Button>)}
+        </div>
+
       </motion.div>
     </Form>
   );
